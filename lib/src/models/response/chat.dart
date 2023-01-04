@@ -6,6 +6,7 @@ class MessageData {
   List<Choices>? choices;
   Usage? usage;
   bool? isChatGPT;
+  bool? isLoading;
 
   MessageData({
     this.id,
@@ -15,6 +16,7 @@ class MessageData {
     this.choices,
     this.usage,
     this.isChatGPT,
+    this.isLoading,
   });
 
   MessageData.fromJson(Map<String, dynamic> json) {

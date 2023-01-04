@@ -18,9 +18,24 @@ class ChatCubit extends Cubit<ChatState> {
         ],
       ),
     );
-    emit(ListMessageState(state));
-    final resMessage = await _chatRepository.sendMessage(message);
-    state.message.add(resMessage);
-    emit(ListMessageState(state));
+    state.message.add(
+      MessageData(
+        isLoading: true,
+        isChatGPT: true,
+        choices: [
+          Choices(text: ''),
+        ],
+      ),
+    );
+    emit(SendingMessage(state));
+    try {
+      final resMessage = await _chatRepository.sendMessage(message);
+      state.message.removeLast();
+      state.message.add(resMessage);
+      emit(SendMessageSuccess(state));
+    } catch (e) {
+      state.message.removeLast();
+      emit(SendMessageFailed(state));
+    }
   }
 }

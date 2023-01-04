@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           locale: const Locale('vi', ''),
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           navigatorObservers: [MyRouteObserver()],

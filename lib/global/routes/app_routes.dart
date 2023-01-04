@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:template/src/screens/chat/chat_screen.dart';
-import './../../src/screens/home/home_screen.dart';
-import './../../src/screens/root/root_screen.dart';
 import '../../src/screens/splash/splash_screen.dart';
 import 'route_keys.dart';
 
@@ -11,10 +9,6 @@ class AppRoutes {
     switch (settings.name) {
       case RouteKey.splash:
         return _materialRoute(routeSettings, const SplashScreen());
-      case RouteKey.home:
-        return _materialRoute(routeSettings, const HomeScreen());
-      case RouteKey.root:
-        return _materialRoute(routeSettings, const RootScreen());
       case RouteKey.chat:
         return _materialRoute(routeSettings, const ChatScreen());
       default:

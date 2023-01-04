@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template/src/screens/chat/bloc/chat_cubit.dart';
+import 'package:template/src/screens/chat/widgets/bottom_text_field.dart';
+import 'package:template/src/screens/chat/widgets/message_item.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -23,61 +24,50 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-  final TextEditingController _editingController = TextEditingController();
+  final ScrollController _controller = ScrollController();
 
-  @override
-  void initState() {
-    super.initState();
+  void _sendMessage(String text) {
+    context.read<ChatCubit>().sendMessage(text);
   }
 
-  void _sendMessage() {
-    context.read<ChatCubit>().sendMessage(_editingController.text);
+  void _scrollToBottom() {
+    _controller.animateTo(
+      _controller.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ChatCubit, ChatState>(
-      listener: (context, state) {
-        if(state is ListMessageState) {
-          _editingController.clear();
-        }
-      },
+    return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color(0xff454654),
         body: Column(
           children: [
             Expanded(
               child: BlocBuilder<ChatCubit, ChatState>(
                 buildWhen: (previous, current) {
-                  return (current is ListMessageState);
+                  return (current is ChatDataState);
                 },
                 builder: (context, state) {
                   return ListView.builder(
+                    controller: _controller,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Text(state.message[index].choices?[0].text ?? '');
+                      return MessageItem(
+                        message: state.message[index],
+                      );
                     },
                     itemCount: state.message.length,
                   );
                 },
               ),
             ),
-            Container(
-              color: Colors.redAccent,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _editingController,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: _sendMessage,
-                    icon: const Icon(
-                      CupertinoIcons.paperplane_fill,
-                    ),
-                  )
-                ],
-              ),
-            )
+            BottomChatField(
+              onSend: (text) => _sendMessage(text),
+              scrollToBottom: () => _scrollToBottom(),
+            ),
           ],
         ),
       ),
