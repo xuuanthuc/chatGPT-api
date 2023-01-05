@@ -1,16 +1,5 @@
-# chat_gpt
+# chatGPT api app
 
-A new Flutter project.
+- [openAI API](https://beta.openai.com/docs/api-reference/introduction)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://user-images.githubusercontent.com/62328990/210687209-71701392-32c4-4d21-bd40-495c67ec7b81.mp4
