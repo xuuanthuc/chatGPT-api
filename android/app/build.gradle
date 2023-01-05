@@ -58,12 +58,12 @@ android {
         dev {
             dimension "app"
             applicationId "at.chwe.flutterflavors.dev"
-            resValue "string", "app_name", "App Dev"
+            resValue "string", "app_name", "ChatGPT Api"
         }
         prod {
             dimension "app"
             applicationId "at.chwe.flutterflavors"
-            resValue "string", "app_name", "App Prod"
+            resValue "string", "app_name", "ChatGPT Api"
         }
     }
 

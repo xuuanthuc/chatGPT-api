@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:template/src/screens/chat/bloc/chat_cubit.dart';
 import 'package:template/src/screens/chat/widgets/bottom_text_field.dart';
 import 'package:template/src/screens/chat/widgets/message_item.dart';
+
+import '../../../global/style/app_images.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -51,7 +54,28 @@ class _ChatViewState extends State<ChatView> {
                   return (current is ChatDataState);
                 },
                 builder: (context, state) {
-                  return ListView.builder(
+                  return state.message.isEmpty ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 70,
+                        width: 70,
+                        padding: const EdgeInsets.all(5),
+                        child: SvgPicture.asset(
+                          AppImages.iUser,
+                          color: Colors.white30,
+                        ),
+                      ),
+                      const Text(
+                        'Say something!',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white30,
+                        ),
+                      )
+                    ],
+                  ) : ListView.builder(
                     controller: _controller,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {

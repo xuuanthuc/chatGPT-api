@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/src/global_bloc/connectivity/connectivity_bloc.dart';
-import 'package:template/src/global_bloc/settings/app_settings_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../global/routes/navigation_service.dart';
-import '../../../l10n/l10n.dart';
+import '../../../global/style/app_images.dart';
 import '../../../global/routes/route_keys.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,14 +12,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   goToHome() async {
-    await Future.delayed(const Duration(milliseconds: 200));
-    navService.pushNamed(RouteKey.chat);
+    await Future.delayed(const Duration(milliseconds: 2000));
+    navService.pushReplacementNamed(RouteKey.chat);
   }
 
   @override
@@ -33,9 +27,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xff454654),
       body: Center(
-        child: Text(AppLocalizations.of(context)!.hello('thuc')),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 80,
+              width: 80,
+              child: SvgPicture.asset(
+                AppImages.iOpenAI,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'ChatGPT',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

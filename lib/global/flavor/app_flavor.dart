@@ -6,7 +6,7 @@ enum Flavor {
 
 class AppFlavor {
   static Flavor appFlavor = Flavor.development;
-  static String openAIApiKey = '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';
+  static String openAIApiKey = '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';
 
   static String get baseApi {
     switch (appFlavor) {
